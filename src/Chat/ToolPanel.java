@@ -16,12 +16,12 @@ import javax.swing.*;
  *
  * @author U$ER
  */
-class TooltPanel extends JPanel //上方工具列
+class ToolPanel extends JPanel //上方工具列
 {
     Window parent;
     
     String chatData = "";
-    TooltPanel(Window p)
+    ToolPanel(Window p)
     {
         super();
         parent = p;

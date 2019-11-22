@@ -7,30 +7,38 @@ package Chat;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Vector;
 import javax.swing.*;
+
 public class Window extends JFrame 
 {  
-    JFrame jframe = new JFrame("視窗程式");
+    JFrame jframe = new JFrame();
     JPanel mainpanel = new JPanel(); //主要版面
-    TooltPanel toolpanel = new TooltPanel(this); //ToplistPanel for tool 
+    ToolPanel toolpanel = new ToolPanel(this); //TopPanel for tool 
     BottomPanel btpanel = new BottomPanel(this); //BottomPanel for typing block
-    LeftlistPanel llpanel = new LeftlistPanel(this); //LeftlistPanel for select a user
-    ChatBox chatbox = new ChatBox(this); //置中聊天室頁面
+    LeftlistPanel llpanel = new LeftlistPanel(this); //LeftlistPanel for select a chatbox
+    ChatBox chatbox = new ChatBox(this); //中間聊天室頁面
     TypeBox typebox = new TypeBox(this); //下方輸入框
     IDBox idbox = new IDBox(this);
-    Database db = new Database(this);
+    Database db = new Database(this); //讀取/寫入資料庫
     
+    Vector<ChatBox> pages = new Vector<ChatBox>(); //Chatbox型態的Vector
     Window() throws Exception
-    {
-        jframe.setSize(900, 900);
+    {     
+//        pages.add(0, chatbox);
+//        pages.elementAt(0).setBackground(Color.red);
+//        pages.add(1, chatbox); //新增2個chatbox到vector內
+//        pages.elementAt(1).setBackground(Color.cyan);
+        
+        jframe.setSize(900, 900); //解析度
         jframe.setResizable(false); //鎖定視窗解析度
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //按X終止程式
         jframe.getContentPane().setLayout(new BorderLayout());
         Dimension ScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        jframe.setLocation((ScreenSize.width-1024)/2, (ScreenSize.height-1024)/2); //初始位置
+        jframe.setLocation((ScreenSize.width-1024)/2, (ScreenSize.height-1024)/2); //設定初始位置
         
         jframe.setContentPane(mainpanel); //
-        mainpanel.setBackground(Color.WHITE);
+        //mainpanel.setBackground(Color.WHITE);
         mainpanel.setLayout(new BorderLayout());
         
         toolpanel.setLayout(new FlowLayout(FlowLayout.LEFT));//上方區塊Layout
@@ -44,6 +52,9 @@ public class Window extends JFrame
         mainpanel.add(llpanel,BorderLayout.WEST); //左側分頁列
         toolpanel.add(idbox,(FlowLayout.LEFT)); 
         //mainpanel.revalidate(); //刷新畫面        
+        
+//        pages.elementAt(1).setVisible(false);
+//        pages.elementAt(0).setVisible(true);
     }
 
     public void run() 

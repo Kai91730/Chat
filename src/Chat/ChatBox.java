@@ -14,6 +14,7 @@ import java.awt.*;
  * @author U$ER
  */
 enum PageStatus{inactivated,activated} //分頁狀態
+
 class ChatBox extends JTextArea 
 {
     Window parent;
@@ -24,13 +25,22 @@ class ChatBox extends JTextArea
     {
         super();
         parent=p;
+       // Status = PageStatus.activated;
         
+        if (Status == PageStatus.activated)
+        {
+            this.setBackground(Color.WHITE);
+            this.setText("Chat here! \n");
+            this.setEditable(false);  //不可編輯
+            this.setVisible(true);
+            //this.revalidate();
+        }
+        else if (Status == PageStatus.inactivated)
+        {
+            this.setVisible(false);
+            
+        }
         
-        Status = PageStatus.activated;
-        this.setBackground(Color.WHITE);
-        this.setText("Chat here! \n");
-        this.setEditable(false);  //不可編輯
-        //this.revalidate();
     }
    
 
