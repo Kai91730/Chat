@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 /**
  *
  * @author U$ER
@@ -15,11 +16,14 @@ import java.awt.event.ActionListener;
 class LeftlistPanel extends JPanel //左側分頁列
 {
     Window parent;
-    
+    //Vector<ChatBox> pages2 = new Vector<ChatBox>(10); //Chatbox型態的Vector
+
     LeftlistPanel(Window p)
     {
         super();
         parent=p;
+        
+        
         this.setBackground(Color.LIGHT_GRAY);
        // this.setPreferredSize(new Dimension(50, 0)); //左Panel初始寬度
         //this.setLayout(null); //null才能改變按鈕大小但還是算了 
@@ -35,12 +39,12 @@ class LeftlistPanel extends JPanel //左側分頁列
         { 
             public void actionPerformed (ActionEvent e) 
             {             
-//                int i = p.pages.size();
-//                System.out.print(i);  //檢查pages元素
-//                p.pages.elementAt(0).setVisible(true);
-//                p.pages.elementAt(1).setVisible(false);
-                p.pages.elementAt(0).Status=PageStatus.activated;
-                p.pages.elementAt(1).Status=PageStatus.inactivated;
+                p.curpage=1;
+//                p.chatbox2.Status = PageStatus.inactivated;
+//                p.chatbox.Status = PageStatus.activated;
+                p.txpanel.removeAll();
+                p.txpanel.add(new JScrollPane(p.chatbox),BorderLayout.CENTER);
+                p.txpanel.revalidate();
             }
         });
         
@@ -48,11 +52,16 @@ class LeftlistPanel extends JPanel //左側分頁列
         { 
             public void actionPerformed (ActionEvent e) 
             {             
-//                p.pages.elementAt(0).setVisible(false);
-//                p.pages.elementAt(1).setVisible(true);
-                p.pages.elementAt(0).Status=PageStatus.inactivated;
-                p.pages.elementAt(1).Status=PageStatus.activated;
+                p.curpage=2;
+//                p.chatbox.Status = PageStatus.inactivated;
+//                p.chatbox2.Status = PageStatus.activated;
+                p.txpanel.removeAll();
+                p.txpanel.add(new JScrollPane(p.chatbox2),BorderLayout.CENTER);
+                p.txpanel.revalidate();
+
             }
         });
+        
+ 
     }
 }

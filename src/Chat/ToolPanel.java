@@ -39,11 +39,14 @@ class ToolPanel extends JPanel //上方工具列
                 {
                     chatData = p.db.GetData();
                     if (chatData.length()>0) //只擷取有內容的歷史紀錄
-                        p.chatbox.append(chatData);
+                        if(p.curpage==1)
+                            p.chatbox.append(chatData);
+                        else if (p.curpage==2)  //*
+                            p.chatbox2.append(chatData);
                 } 
                 catch (Exception ex) 
                 {
-                    System.out.println("something is wrong in ToolPanel.java or Database.java"); 
+                    System.out.println("something is wrong in ToolPanel.java or Database.java / mySQL is offline"); 
                 }
             }
         });

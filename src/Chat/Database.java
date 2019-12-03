@@ -22,10 +22,11 @@ public class Database {
         Class.forName("com.mysql.cj.jdbc.Driver"); // load "com.mysql.cj.jdbc.Driver" Class
         Connection conn = DriverManager.getConnection(url,uname,pass); //check DriverManager.getConnection
         PreparedStatement state = conn.prepareStatement(query); //不確定值時可用PreparedStatement
-        state.setString(1, Date);
+        //以下依序填入query語法的"?"處
+        state.setString(1, Date); 
         state.setString(2, ID);
         state.setString(3, content);
-        int count = state.executeUpdate();
+        int count = state.executeUpdate(); //執行語法
         System.out.println(count + "row/s added.");  
         state.close();
         conn.close();  

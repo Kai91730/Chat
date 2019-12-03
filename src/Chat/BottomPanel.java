@@ -45,18 +45,25 @@ class BottomPanel extends JPanel //下方輸入列
                     SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");  //hh:mm:ss >12小時制 HH:mm:ss>24小時制
                     java.util.Date date = new java.util.Date(); //使用java.util.Date (和 java.sql.Date衝突)
                     String strDate = sdFormat.format(date); //格式化系統時間，放按鈕事件裡面才會更新時間
-
-                    p.chatbox.setLineWrap(true); //訊息太長自動換行
-                    p.chatbox.append(p.idbox.getText() + " (" + strDate );
-                    p.chatbox.append(")\n      " + p.typebox.getText() + "\n"); //在句尾增加文字
-
+                    
+                    if(p.curpage==1)
+                    {
+                        p.chatbox.append(p.idbox.getText() + " (" + strDate );
+                        p.chatbox.append(")\n      " + p.typebox.getText() + "\n"); //在句尾增加文字
+                    }
+                    else if (p.curpage==2) //*
+                    {
+                        p.chatbox2.append(p.idbox.getText() + " (" + strDate );
+                        p.chatbox2.append(")\n      " + p.typebox.getText() + "\n"); //在句尾增加文字
+                    }
+                    
                     try
                     {
                         p.db.SendData(strDate, p.idbox.getText(),p.typebox.getText());
                     }
                     catch (Exception sqle)
                     {
-                        System.out.println("something is wrong in BottomPanel.java or Database.java"); 
+                        System.out.println("something is wrong in BottomPanel.java or Database.java / mySQL is offline"); 
                     }
                 }
                 

@@ -21,26 +21,29 @@ class ChatBox extends JTextArea
     PageStatus Status;
     
     
-    ChatBox (Window p)
+    ChatBox (Window p,Color color)
     {
         super();
         parent=p;
-       // Status = PageStatus.activated;
+        this.setText("Chat here! \n");    
+        this.setLineWrap(true); //自動換行
+        this.setEditable(false);  //不可編輯
+        this.setVisible(true);
+
         
         if (Status == PageStatus.activated)
         {
-            this.setBackground(Color.WHITE);
-            this.setText("Chat here! \n");
-            this.setEditable(false);  //不可編輯
-            this.setVisible(true);
-            //this.revalidate();
+            if (p.curpage==1)
+                p.txpanel.add(new JScrollPane(p.chatbox),BorderLayout.CENTER);
+            else if (p.curpage==2) 
+                p.txpanel.add(new JScrollPane(p.chatbox2),BorderLayout.CENTER);
+            p.txpanel.revalidate();
         }
         else if (Status == PageStatus.inactivated)
         {
-            this.setVisible(false);
+            p.txpanel.removeAll();
             
         }
-        
     }
    
 
